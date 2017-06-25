@@ -27,10 +27,13 @@ const authOptions = {
   json: true
 };
 
-/* GET home page. */
+let trackID;
+
+/* GET authorization token and make data request. */
 router.get('/test', (req, res, next) => {
-  console.log('test');
-  // res.render('index', { title: 'Express' });
+  trackID = req.body.track;
+  console.log(trackID);
+
   request.post(authOptions, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       // use the access token to access the Spotify Web API
@@ -49,22 +52,28 @@ router.get('/test', (req, res, next) => {
     }
   });
 });
-//
-// request.post(authOptions, (error, response, body) => {
-//   if (!error && response.statusCode === 200) {
-//     // use the access token to access the Spotify Web API
-//     const token = body.access_token;
-//     const options = {
-//       url: 'https://api.spotify.com/v1/users/jmperezperez',
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       },
-//       json: true
-//     };
-//     request.get(options, (error, response, body) => {
-//       console.log(body);
-//     });
-//   }
-// });
+
+router.post('/test', (req, res, next) => {
+  trackID = req.body.track;
+  console.log(trackID);
+
+  request.post(authOptions, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      // use the access token to access the Spotify Web API
+      const token = body.access_token;
+      const options = {
+        url: `https://api.spotify.com/v1/tracks/${trackID}`,
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        json: true
+      };
+      request.get(options, (error, response, body) => {
+        console.log(body);
+        res.send(body);
+      });
+    }
+  });
+});
 
 module.exports = router;

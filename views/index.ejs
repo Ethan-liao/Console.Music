@@ -6,8 +6,12 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <a href="/test"><button id="button" type="submit" name="button">Test</button></a>
+    <form method="POST" action="/test">
+      <input type="text" name="track" id="new-track" value="" placeholder="Track" required><br>
+      <a href="/test"><button id="button" type="submit" name="button">Test</button></a>
+      <button id="button" type="submit" name="button">Test2</button>
+    </form>
+
   </body>
   <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
 </html>
