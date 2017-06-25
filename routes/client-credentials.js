@@ -27,34 +27,14 @@ const authOptions = {
   json: true
 };
 
-let trackID;
+/* Gets the authorization token and makes data request based off form input. */
+router.post('/track', (req, res, next) => {
+  const trackURI = req.body.track;
+  const language = req.body.language;
+  const comment = req.body.comment;
 
-/* GET authorization token and make data request. */
-router.get('/test', (req, res, next) => {
-  trackID = req.body.track;
-  console.log(trackID);
-
-  request.post(authOptions, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      // use the access token to access the Spotify Web API
-      const token = body.access_token;
-      const options = {
-        url: 'https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-        json: true
-      };
-      request.get(options, (error, response, body) => {
-        console.log(body);
-        res.send(body);
-      });
-    }
-  });
-});
-
-router.post('/test', (req, res, next) => {
-  trackID = req.body.track;
+  // Turn this into a function to accomodate other types of input
+  const trackID = trackURI.substr(14);
   console.log(trackID);
 
   request.post(authOptions, (error, response, body) => {
@@ -69,7 +49,11 @@ router.post('/test', (req, res, next) => {
         json: true
       };
       request.get(options, (error, response, body) => {
-        console.log(body);
+        // insert data to db via knex_migrations
+        // res.redirect() to main library page
+        console.log(body.name);
+        console.log(language);
+        console.log(comment);
         res.send(body);
       });
     }
