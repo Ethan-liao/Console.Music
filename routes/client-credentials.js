@@ -61,8 +61,8 @@ router.post('/track', (req, res, next) => {
         })
         .then(id => knex('users_posts')
         .insert({
-          user_id: user,
-          post_id: id
+          user_id: parseInt(user),
+          post_id: parseInt(id)
         }))
         .then(() => {
           res.redirect('/library');
