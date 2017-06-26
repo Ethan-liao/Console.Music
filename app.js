@@ -5,6 +5,8 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const cookieSession = require('cookie-session');
 
 const index = require('./routes/index');
 const user = require('./routes/user');
@@ -31,6 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(index);
 app.use(user);
 app.use(credentials);
+
+app.use(cookieSession({
+  name: 'music_library',
+  // use environment variables to store secure information
+  keys: [process.env.KEY_ONE, process.env.KEY_TWO, process.env.KEY_THREE]
+}));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
