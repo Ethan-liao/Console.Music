@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Add Track</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
+    <h1>Add a Spotify Track</h1>
     <form method="POST" action="/track">
       <input type="hidden" name="user_id" value="1">
-      <input type="text" name="track" id="new-track" value="" placeholder="Track" required><br>
+      <input type="text" name="track" id="new-track" value="" placeholder="Paste Spotify Track URI Here" required><br>
       <input type="text" name="language" id="new-language" value="" placeholder="Language" required><br>
       <textarea name="comment" id="new-comment" rows="5" cols="80" placeholder="Add comment here" required></textarea><br>
       <button type="submit" name="button">Submit Track</button>
