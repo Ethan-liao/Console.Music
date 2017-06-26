@@ -8,9 +8,10 @@ router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
 
-
+// Registers a username and hashed password, adds to db
 router.post('/user', (req, res, next) => {
-  const { username, password } = req.body;
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (!username || username.trim() === '') {
     const err = new Error('Username must not be blank');
@@ -27,7 +28,7 @@ router.post('/user', (req, res, next) => {
   }
 
   knex('users')
-    .select(knex.raw('1=1'))
+    // .select(knex.raw('1=1'))
     .where('username', username)
     .first()
     .then((exists) => {
@@ -48,5 +49,6 @@ router.post('/user', (req, res, next) => {
       next(err);
     });
 });
+
 
 module.exports = router;
