@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Library</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Library</h1>
+    <ul>
+      <% posts.forEach((post) => { %>
+
+      <li>
+        <img src="<%= post.image_url %>" alt="<%= post.title %>">
+        <p><%= post.type %></p>
+        <p><%= post.title %></p>
+        <p><%= post.artist %></p>
+        <p><%= post.language %></p>
+        <p><%= post.comment %></p>
+      </li>
+
+      <% }); %>
+
+    </ul>
+
+  </body>
+  <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+</html>
