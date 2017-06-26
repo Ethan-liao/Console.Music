@@ -7,6 +7,7 @@
 const request = require('request'); // "Request" library
 const express = require('express');
 const knex = require('../knex');
+
 const router = express.Router();
 
 const client_id = '893c3223efb24f6098017c1a11cfecd0'; // Provided by spotfiy
@@ -30,6 +31,7 @@ router.post('/track', (req, res, next) => {
   const trackURI = req.body.track;
   const newLanguage = req.body.language;
   const newComment = req.body.comment;
+  const user = req.body.user_id;
 
   // Turn this into a function to accomodate other types of input
   const trackID = trackURI.substr(14);
@@ -47,9 +49,8 @@ router.post('/track', (req, res, next) => {
         json: true
       };
       request.get(options, (error, response, body) => {
-        // insert data to db via knex_migrations
-        // res.redirect() to main library page
         knex('posts')
+        .returning('id')
         .insert({
           type: body.type,
           title: body.name,
@@ -58,16 +59,14 @@ router.post('/track', (req, res, next) => {
           comment: newComment,
           image_url: body.album.images[0].url
         })
+        .then(id => knex('users_posts')
+        .insert({
+          user_id: user,
+          post_id: id
+        }))
         .then(() => {
-          // res.send(body);
           res.redirect('/library');
         });
-        // console.log(body.type);
-        // console.log(body.name);
-        // console.log(body.artists[0].name);
-        // console.log(language);
-        // console.log(comment);
-        // console.log(body.album.images[0].url);
       });
     }
   });
@@ -75,7 +74,7 @@ router.post('/track', (req, res, next) => {
 
 // GET request for all books from our database
 router.get('/library', (_req, res, next) => {
-  knex('posts')
+  knex('posts').orderBy('created_at', 'desc')
   .then((posts) => {
     res.render('library', {
       posts
