@@ -10,4 +10,8 @@ router.get('/track', (req, res, next) => {
   res.render('add_track');
 });
 
+router.get('/register', (req, res, next) => {
+  res.render('register');
+});
+
 module.exports = router;
