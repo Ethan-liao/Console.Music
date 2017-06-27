@@ -48,7 +48,7 @@ passport.deserializeUser((obj, done) => {
 passport.use(new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'http://localhost:8000/library'
+  callbackURL: 'https://ishamd-music-library.herokuapp.com/library' // http://localhost:8000/library for dev
 },
   (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
