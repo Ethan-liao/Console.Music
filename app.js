@@ -20,7 +20,7 @@ const index = require('./routes/index');
 // user was previously used for bcrypt login -- disabling for passport testing
 // const user = require('./routes/user');
 const credentials = require('./routes/client-credentials');
-const authRoute = require('./routes/auth');
+// const authRoute = require('./routes/auth');
 
 const appKey = '893c3223efb24f6098017c1a11cfecd0';
 const appSecret = '10c5354ab52548ef80f37c5612eb0c5f';

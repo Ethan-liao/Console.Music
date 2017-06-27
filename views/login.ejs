@@ -1,23 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Login</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Login Page</h1>
-    <form method="POST" action="/session">
-      <input type="text" name="username" id="username" value="" placeholder="Username"><br>
-      <input type="text" name="password" id="password" value="" placeholder="Password"><br>
-      <button type="submit" name="button">Log In</button>
-    </form>
-    <p>No account? Register Here:</p>
-    <form method="GET" action="/register">
-      <button type="submit" name="button">Register</button>
-    </form>
-    <p>Login with Spotify</p>
-    <a href="/auth/spotify">Spotify Auth</a>
+<% include ./header %>
+
+    <div class="container">
+      <!-- <h1>Login Page</h1> -->
+      <!-- <form method="POST" action="/session">
+        <input type="text" name="username" id="username" value="" placeholder="Username"><br>
+        <input type="text" name="password" id="password" value="" placeholder="Password"><br>
+        <button type="submit" name="button">Log In</button>
+      </form>
+      <p>No account? Register Here:</p>
+      <form method="GET" action="/register">
+        <button type="submit" name="button">Register</button>
+      </form> -->
+      <!-- <p>Login with Spotify</p> -->
+      <h4>Welcome to Music Libray!</h4>
+      <h5><a href="/auth/spotify">Log in with Spotify</a></h5>
+    </div>
 
   </body>
-  <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-</html>
+<% include ./footer %>

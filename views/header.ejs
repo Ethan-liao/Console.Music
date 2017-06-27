@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Music Library</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/stylesheets/materialize.min.css"/>
+  </head>
+  <body>
+    <div class="navbar-fixed">
+      <nav>
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="/track">Add Track</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Add Artist</a></li>
+        </ul>
+      <nav>
+        <div class="nav-wrapper container">
+          <a href="/" class="brand-logo">Music Library</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/library">Home</a></li>
+            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Add<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="/logout">Log Out</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
