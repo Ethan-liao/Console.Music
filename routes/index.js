@@ -4,6 +4,7 @@ const passport = require('passport');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+  console.log('root');
   res.render('login');
 });
 
@@ -16,7 +17,10 @@ router.get('/register', (req, res, next) => {
 });
 
 router.get('/auth/spotify',
-  passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'] }),
+  passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'] }, (err, user) => {
+    console.log('more garbage');
+    console.log(user);
+  }),
   (req, res) => {
    // The request will be redirected to spotify for authentication, so this
    // function will not be called.
@@ -30,8 +34,13 @@ router.get('/auth/spotify',
 router.get('/auth/spotify/callback',
   passport.authenticate('spotify', { failureRedirect: '/login' }),
   (req, res) => {
-    // Successful authentication, redirect home.
-    res.redirect('library');
+    // Successful authentication, redirect to library.
+    // add user to db
+    // console.log(req.user);
+    console.log(req.user.username);
+    console.log(req.user.profileUrl);
+    console.log(req.user._json.email);
+    res.redirect('/library');
   });
 
 router.get('/logout', (req, res) => {

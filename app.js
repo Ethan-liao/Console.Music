@@ -48,16 +48,18 @@ passport.deserializeUser((obj, done) => {
 passport.use(new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'https://ishamd-music-library.herokuapp.com/library' // http://localhost:8000/library for dev
+  callbackURL: 'http://localhost:8000/auth/spotify/callback' //  for dev https://ishamd-music-library.herokuapp.com/library
 },
   (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
+    console.log('SpotifyStrategy being hit');
+    // User.findOrCreate({ spotifyId: profile.id }, (err, user) => done(err, user));
     process.nextTick(() =>
       // To keep the example simple, the user's spotify profile is returned to
       // represent the logged-in user. In a typical application, you would want
       // to associate the spotify account with a user record in your database,
       // and return that user instead.
-       done(null, profile));
+    done(null, profile));
   }));
 
 const port = process.env.PORT || 8000;
