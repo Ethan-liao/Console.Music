@@ -28,7 +28,6 @@ router.post('/user', (req, res, next) => {
   }
 
   knex('users')
-    // .select(knex.raw('1=1'))
     .where('username', username)
     .first()
     .then((exists) => {

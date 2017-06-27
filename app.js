@@ -7,10 +7,58 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
+// passport-spotify requirements
+const session = require('express-session');
+const passport = require('passport');
+// const swig = require('swig');
+const SpotifyStrategy = require('./spotify/index').Strategy;
+// const SpotifyStrategy = require('passport-spotify');
+const consolidate = require('consolidate');
+
 
 const index = require('./routes/index');
-const user = require('./routes/user');
+// user was previously used for bcrypt login -- disabling for passport testing
+// const user = require('./routes/user');
 const credentials = require('./routes/client-credentials');
+const authRoute = require('./routes/auth');
+
+const appKey = '893c3223efb24f6098017c1a11cfecd0';
+const appSecret = '10c5354ab52548ef80f37c5612eb0c5f';
+
+
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session. Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing. However, since this example does not
+//   have a database of user records, the complete spotify profile is serialized
+//   and deserialized.
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(null, obj);
+});
+
+// Use the SpotifyStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and spotify
+//   profile), and invoke a callback with a user object.
+passport.use(new SpotifyStrategy({
+  clientID: appKey,
+  clientSecret: appSecret,
+  callbackURL: 'http://localhost:8000/library'
+},
+  (accessToken, refreshToken, profile, done) => {
+    // asynchronous verification, for effect...
+    process.nextTick(() =>
+      // To keep the example simple, the user's spotify profile is returned to
+      // represent the logged-in user. In a typical application, you would want
+      // to associate the spotify account with a user record in your database,
+      // and return that user instead.
+       done(null, profile));
+  }));
 
 const port = process.env.PORT || 8000;
 
@@ -30,9 +78,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(index);
-app.use(user);
+// app.use(user);
 app.use(credentials);
+// app.use(authRoute);
 
 app.use(cookieSession({
   name: 'music_library',
