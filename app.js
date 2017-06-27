@@ -5,7 +5,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 // passport-spotify requirements
 const session = require('express-session');
