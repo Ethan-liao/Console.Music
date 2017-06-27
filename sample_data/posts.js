@@ -7,7 +7,7 @@ module.exports =
     language: 'JavaScript',
     comment: 'Sample comment',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -17,7 +17,7 @@ module.exports =
     language: 'Python',
     comment: 'Sample comment',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -27,7 +27,7 @@ module.exports =
     language: 'JavaScript',
     comment: 'Sample comment',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -37,7 +37,7 @@ module.exports =
     language: 'Java',
     comment: 'Java is great',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -47,7 +47,7 @@ module.exports =
     language: 'Ruby',
     comment: 'Ruby rules',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -57,7 +57,7 @@ module.exports =
     language: 'Swift',
     comment: 'This song is the best',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -67,7 +67,7 @@ module.exports =
     language: 'R',
     comment: 'This song is my favorite',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   },
   {
@@ -77,7 +77,7 @@ module.exports =
     language: 'JavaScript',
     comment: 'best ever',
     image_url: 'https://i.scdn.co/image/7e661e443083a9f6ce566bf25d28b437a244e5d6',
-    track_url: 'https://api.spotify.com/v1/tracks/2qC1sUo8xxRRqYsaYEdDuZ',
+    track_url: 'https://open.spotify.com/track/2qC1sUo8xxRRqYsaYEdDuZ',
     preview_url: 'https://p.scdn.co/mp3-preview/6359d7d3468e40bcd94d32d52c040ba005c25f4e?cid=8897482848704f2a8f8d7c79726a70d4'
   }
 ];

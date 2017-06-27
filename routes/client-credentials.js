@@ -57,7 +57,9 @@ router.post('/track', (req, res, next) => {
           artist: body.artists[0].name,
           language: newLanguage,
           comment: newComment,
-          image_url: body.album.images[0].url
+          image_url: body.album.images[0].url,
+          track_url: body.external_urls.spotify,
+          preview_url: body.preview_url
         })
         .then(id => knex('users_posts')
         .insert({
