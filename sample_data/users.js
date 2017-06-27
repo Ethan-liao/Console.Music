@@ -1,15 +1,21 @@
 module.exports =
 [
   {
-    username: 'user1',
-    hashed_password: 'password1'
+    username: 'isham-test',
+    email: 'danielishamm1@gmail.com',
+    image_url: 'https://open.spotify.com/user/isham-test',
+    admin: 'True'
   },
   {
-    username: 'user2',
-    hashed_password: 'password2'
+    username: '1249905970',
+    email: 'daniel.isham@colorado.edu',
+    image_url: 'https://open.spotify.com/user/1249905970',
+    admin: 'False'
   },
   {
-    username: 'user3',
-    hashed_password: 'password3'
+    username: 'test-user-123',
+    email: 'test.user@gmail.com',
+    image_url: 'https://www.fillmurray.com/140/100',
+    admin: 'False'
   }
 ];

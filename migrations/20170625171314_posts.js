@@ -8,6 +8,8 @@ exports.up = function (knex) {
     table.string('language').notNullable().defaultTo('');
     table.text('comment').notNullable().defaultTo('');
     table.text('image_url').notNullable().defaultTo('');
+    table.text('track_url').notNullable().defaultTo('');
+    table.text('preview_url').notNullable().defaultTo('');
     table.timestamps(true, true);
   });
 };

@@ -36,10 +36,10 @@ router.get('/auth/spotify/callback',
   (req, res) => {
     // Successful authentication, redirect to library.
     // add user to db
-    // console.log(req.user);
+
     console.log(req.user.username);
-    console.log(req.user.profileUrl);
     console.log(req.user._json.email);
+    console.log(req.user.profileUrl);
     res.redirect('/library');
   });
 
