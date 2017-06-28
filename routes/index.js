@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 router.get('/track', (req, res, next) => {
   if (req.session.userID) {
     const user_id = req.session.userID;
-    res.render('add_track');
+    res.render('add_track', { id: user_id });
   } else {
     console.log('Not authorized to add track');
     res.redirect('/');
