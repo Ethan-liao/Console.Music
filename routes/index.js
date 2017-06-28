@@ -9,7 +9,6 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/track', (req, res, next) => {
-  console.log('Cookies: ', req.cookies);
   res.render('add_track');
 });
 
@@ -56,7 +55,7 @@ router.get('/auth/spotify/callback',
           req.session.userID = exists.id;
           console.log('user exists in the db!');
           console.log('session user id:', req.session.userID);
-          console.log(req.session.passport);
+          // console.log(req.session.passport);
           res.redirect('/library');
         }
       });
@@ -66,11 +65,9 @@ router.get('/auth/spotify/callback',
 // GET request for all books from our database
 router.get('/library', (req, res, next) => {
   // check if user is authenticated
-  console.log('library page hit');
-  console.log(req.session.userID);
-  // if (req.session.userID) {
-    // do something
-  knex('posts').orderBy('created_at', 'desc')
+  if (req.session.userID) {
+    // render library page with posts from db
+    knex('posts').orderBy('created_at', 'desc')
     .then((posts) => {
       res.render('library', {
         posts
@@ -79,11 +76,11 @@ router.get('/library', (req, res, next) => {
     .catch((err) => {
       next(err);
     });
-  // } else {
+  } else {
     // go back to login and throw error
-  //   console.log('Not authorized to view this page');
-  //   res.redirect('/');
-  // }
+    console.log('Not authorized to view this page');
+    res.redirect('/');
+  }
 });
 
 

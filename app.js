@@ -5,23 +5,18 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-// const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 // passport-spotify requirements
-// const session = require('express-session');
 const passport = require('passport');
-// const swig = require('swig');
 const SpotifyStrategy = require('./spotify/index').Strategy;
-// const SpotifyStrategy = require('passport-spotify');
 const consolidate = require('consolidate');
+// const session = require('express-session');
+// const swig = require('swig');
+
 require('dotenv').config();
 
-
 const index = require('./routes/index');
-// user was previously used for bcrypt login -- disabling for passport testing
-// const user = require('./routes/user');
 const credentials = require('./routes/client-credentials');
-// const authRoute = require('./routes/auth');
 
 const port = process.env.PORT || 8000;
 
@@ -47,8 +42,8 @@ app.use(cookieSession({
   keys: [process.env.KEY_ONE, process.env.KEY_TWO, process.env.KEY_THREE]
 }));
 
-const appKey = '893c3223efb24f6098017c1a11cfecd0';
-const appSecret = '10c5354ab52548ef80f37c5612eb0c5f';
+const appKey = process.env.SPOTIFY_KEY;
+const appSecret = process.env.SPOTIFY_SECRET;
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -76,8 +71,6 @@ passport.use(new SpotifyStrategy({
 },
   (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
-    console.log('SpotifyStrategy being hit');
-    // User.findOrCreate({ spotifyId: profile.id }, (err, user) => done(err, user));
     process.nextTick(() =>
       // To keep the example simple, the user's spotify profile is returned to
       // represent the logged-in user. In a typical application, you would want
