@@ -67,7 +67,7 @@ router.get('/auth/spotify/callback',
 router.get('/library', (req, res, next) => {
   // check if user is authenticated
   console.log('library page hit');
-  console.log(req.session);
+  console.log(req.session.userID);
   // if (req.session.userID) {
     // do something
   knex('posts').orderBy('created_at', 'desc')
