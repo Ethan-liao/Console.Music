@@ -9,7 +9,13 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/track', (req, res, next) => {
-  res.render('add_track');
+  if (req.session.userID) {
+    const user_id = req.session.userID;
+    res.render('add_track');
+  } else {
+    console.log('Not authorized to add track');
+    res.redirect('/');
+  }
 });
 
 router.get('/auth/spotify',
@@ -38,9 +44,9 @@ router.get('/auth/spotify/callback',
         if (!exists) {
           knex('users')
             .insert({
-              username: user.username,
-              email: user._json.email,
-              image_url: user.profileUrl,
+              username: req.user.username,
+              email: req.user._json.email,
+              image_url: req.user.profileUrl,
               admin: 'False'
             })
             .returning('id')
@@ -65,6 +71,7 @@ router.get('/auth/spotify/callback',
 // GET request for all books from our database
 router.get('/library', (req, res, next) => {
   // check if user is authenticated
+  console.log(req.session.userID);
   if (req.session.userID) {
     // render library page with posts from db
     knex('posts').orderBy('created_at', 'desc')
@@ -85,7 +92,7 @@ router.get('/library', (req, res, next) => {
 
 
 router.get('/logout', (req, res) => {
-  req.session = null;
+  req.session.userID = null;
   req.logout();
   res.redirect('/');
 });

@@ -7,10 +7,11 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 // passport-spotify requirements
+const session = require('express-session');
 const passport = require('passport');
 const SpotifyStrategy = require('./spotify/index').Strategy;
 const consolidate = require('consolidate');
-// const session = require('express-session');
+
 // const swig = require('swig');
 
 require('dotenv').config();
@@ -42,8 +43,8 @@ app.use(cookieSession({
   keys: [process.env.KEY_ONE, process.env.KEY_TWO, process.env.KEY_THREE]
 }));
 
-const appKey = process.env.SPOTIFY_KEY;
-const appSecret = process.env.SPOTIFY_SECRET;
+const appKey = '893c3223efb24f6098017c1a11cfecd0';
+const appSecret = '10c5354ab52548ef80f37c5612eb0c5f';
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
