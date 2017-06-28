@@ -1,25 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const knex = require('../knex');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  console.log('root');
   res.render('login');
 });
 
 router.get('/track', (req, res, next) => {
+  console.log('Cookies: ', req.cookies);
   res.render('add_track');
-});
-
-router.get('/register', (req, res, next) => {
-  res.render('register');
 });
 
 router.get('/auth/spotify',
   passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'] }, (err, user) => {
-    console.log('more garbage');
-    console.log(user);
   }),
   (req, res) => {
    // The request will be redirected to spotify for authentication, so this
@@ -36,14 +31,64 @@ router.get('/auth/spotify/callback',
   (req, res) => {
     // Successful authentication, redirect to library.
     // add user to db
-
-    console.log(req.user.username);
-    console.log(req.user._json.email);
-    console.log(req.user.profileUrl);
-    res.redirect('/library');
+    knex('users')
+      .where('username', req.user.username)
+      .first()
+      .returning('id')
+      .then((exists) => {
+        if (!exists) {
+          knex('users')
+            .insert({
+              username: user.username,
+              email: user._json.email,
+              image_url: user.profileUrl,
+              admin: 'False'
+            })
+            .returning('id')
+            .then((id) => {
+              req.session.userID = id;
+              console.log('user added!');
+              console.log(req.session.userID);
+              res.redirect('/library');
+            });
+        } else {
+          // start a session with user credentials
+          req.session.userID = exists.id;
+          console.log('user exists in the db!');
+          console.log('session user id:', req.session.userID);
+          console.log(req.session.passport);
+          res.redirect('/library');
+        }
+      });
   });
 
+
+// GET request for all books from our database
+router.get('/library', (req, res, next) => {
+  // check if user is authenticated
+  console.log('library page hit');
+  console.log(req.session);
+  // if (req.session.userID) {
+    // do something
+  knex('posts').orderBy('created_at', 'desc')
+    .then((posts) => {
+      res.render('library', {
+        posts
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+  // } else {
+    // go back to login and throw error
+  //   console.log('Not authorized to view this page');
+  //   res.redirect('/');
+  // }
+});
+
+
 router.get('/logout', (req, res) => {
+  req.session = null;
   req.logout();
   res.redirect('/');
 });
@@ -53,9 +98,9 @@ router.get('/logout', (req, res) => {
 //   the request is authenticated (typically via a persistent login session),
 //   the request will proceed. Otherwise, the user will be redirected to the
 //   login page.
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
-}
+// function ensureAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) { return next(); }
+//   res.redirect('/login');
+// }
 
 module.exports = router;

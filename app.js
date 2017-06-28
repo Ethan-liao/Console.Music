@@ -8,12 +8,13 @@ const bodyParser = require('body-parser');
 // const bcrypt = require('bcrypt');
 const cookieSession = require('cookie-session');
 // passport-spotify requirements
-const session = require('express-session');
+// const session = require('express-session');
 const passport = require('passport');
 // const swig = require('swig');
 const SpotifyStrategy = require('./spotify/index').Strategy;
 // const SpotifyStrategy = require('passport-spotify');
 const consolidate = require('consolidate');
+require('dotenv').config();
 
 
 const index = require('./routes/index');
@@ -81,7 +82,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); // look into this
 
 app.use(index);
 // app.use(user);
@@ -89,7 +90,7 @@ app.use(credentials);
 // app.use(authRoute);
 
 app.use(cookieSession({
-  name: 'music_library',
+  name: 'session',
   // use environment variables to store secure information
   keys: [process.env.KEY_ONE, process.env.KEY_TWO, process.env.KEY_THREE]
 }));
