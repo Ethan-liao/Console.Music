@@ -36,8 +36,12 @@ router.get('/auth/spotify/callback',
   (req, res) => {
     // Successful authentication, redirect to library.
     // add user to db
-    console.log(req.user.displayName);
-    console.log(req.user.photos[0]);
+    let displayName = req.user.displayName;
+
+    if (displayName === null) {
+      displayName = 'Spotify User';
+    }
+
     knex('users')
       .where('username', req.user.username)
       .first()
@@ -47,7 +51,7 @@ router.get('/auth/spotify/callback',
           knex('users')
             .insert({
               username: req.user.username,
-              displayName: req.user.displayName,
+              displayName,
               email: req.user._json.email,
               profile_url: req.user.photos[0],
               admin: 'False'
@@ -103,15 +107,5 @@ router.get('/logout', (req, res) => {
   // req.logout();
   res.redirect('/');
 });
-
-// Simple route middleware to ensure user is authenticated.
-//   Use this route middleware on any resource that needs to be protected.  If
-//   the request is authenticated (typically via a persistent login session),
-//   the request will proceed. Otherwise, the user will be redirected to the
-//   login page.
-// function ensureAuthenticated(req, res, next) {
-//   if (req.isAuthenticated()) { return next(); }
-//   res.redirect('/login');
-// }
 
 module.exports = router;
