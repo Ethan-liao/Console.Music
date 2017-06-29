@@ -8,13 +8,28 @@
 
         <form method="POST" action="/track">
 
-          <input type="hidden" name="user_id" value="<%= id %>">
           <input type="text" name="track" id="new-track" value="" placeholder="Paste Spotify Track URI Here    (e.g. spotify:track:0hNduWmlWmEmuwEFcYvRu1)" required><br>
-          <input type="hidden" name="language" id="new-language" value="JavaScript" placeholder="Programming Language" required><br>
           <textarea name="comment" id="new-comment" rows="5" cols="80" placeholder="Add comment here" required></textarea><br>
           <button class="btn btn-defualt" type="submit" name="button">Submit Track</button>
+          <input type="hidden" name="user_id" value="<%= id %>">
+          <input type="hidden" name="language" id="new-language" value="JavaScript" placeholder="Programming Language" required><br>
 
         </form>
+
+        <div class="">
+          <p><strong>Instructions:</strong></p>
+          <ol>
+            <li>Open Spotify Desktop Application</li>
+            <li>Right click on the track of your choosing</li>
+            <li>Select the Share option (bottom of dropdown)</li>
+            <img src="/images/share.png" alt="" height="330px">
+            <li>Select the URI option (far right)</li>
+            <img src="/images/uri.png" alt="" height="100px">
+            <li>Paste the link into the form above (no alteration needed)</li>
+            <li>Add a comment</li>
+            <li>Submit the track!</li>
+          </ol>
+        </div>
 
       </div>
 

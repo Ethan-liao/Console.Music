@@ -10,22 +10,30 @@
   </head>
   <body>
     <div class="navbar-fixed">
-      <nav>
-        <ul id="dropdown1" class="dropdown-content">
-          <li><a href="/track">Add Track</a></li>
-          <!-- <li class="divider"></li>
-          <li><a href="#">Add Artist</a></li> -->
-        </ul>
+      <!-- <nav> -->
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="/track">Add Track</a></li>
+      </ul>
+
       <nav>
         <div class="nav-wrapper container">
-          <a href="/" class="brand-logo">Console.Music</a>
+          <a href="/library" class="brand-logo">Console.Music</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <li><a href="/library">Home</a></li>
-            <!-- Dropdown Trigger -->
             <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Add<i class="material-icons right">arrow_drop_down</i></a></li>
             <li><a href="/my_posts">My Posts</a></li>
             <li><a href="/logout">Log Out</a></li>
           </ul>
+
         </div>
       </nav>
+
     </div>
+
+    <ul class="side-nav" id="mobile-demo">
+      <li><a href="/library">Home</a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Add<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a href="/my_posts">My Posts</a></li>
+      <li><a href="/logout">Log Out</a></li>
+    </ul>
