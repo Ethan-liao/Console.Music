@@ -19,7 +19,7 @@ router.get('/track', (req, res, next) => {
 });
 
 router.get('/auth/spotify',
-  passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'] }, (err, user) => {
+  passport.authenticate('spotify', { scope: ['user-read-email', 'user-read-private'], showDialog: true }, (err, user) => {
   }),
   (req, res) => {
    // The request will be redirected to spotify for authentication, so this
@@ -95,8 +95,9 @@ router.get('/library', (req, res, next) => {
 
 
 router.get('/logout', (req, res) => {
-  req.session.userID = null;
-  req.logout();
+  req.session = null;
+  console.log(req.session);
+  // req.logout();
   res.redirect('/');
 });
 
