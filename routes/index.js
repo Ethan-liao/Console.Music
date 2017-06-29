@@ -36,6 +36,8 @@ router.get('/auth/spotify/callback',
   (req, res) => {
     // Successful authentication, redirect to library.
     // add user to db
+    console.log(req.user.displayName);
+    console.log(req.user.photos[0]);
     knex('users')
       .where('username', req.user.username)
       .first()
@@ -45,8 +47,9 @@ router.get('/auth/spotify/callback',
           knex('users')
             .insert({
               username: req.user.username,
+              displayName: req.user.displayName,
               email: req.user._json.email,
-              profile_url: req.user.profileUrl,
+              profile_url: req.user.photos[0],
               admin: 'False'
             })
             .returning('id')
