@@ -46,7 +46,7 @@ router.get('/auth/spotify/callback',
             .insert({
               username: req.user.username,
               email: req.user._json.email,
-              image_url: req.user.profileUrl,
+              profile_url: req.user.profileUrl,
               admin: 'False'
             })
             .returning('id')

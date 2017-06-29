@@ -8,7 +8,7 @@ router.get('/my_posts', (req, res, next) => {
   // check if user is authenticated
   if (req.session.userID) {
     // render library page with posts from db
-    const id = req.session.userID;
+    const id = Number.parseInt(req.session.userID);
     knex('users_posts')
     .where('user_id', id)
     .join('posts', 'users_posts.post_id', 'posts.id')
