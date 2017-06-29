@@ -18,6 +18,7 @@ require('dotenv').config();
 
 const index = require('./routes/index');
 const credentials = require('./routes/client-credentials');
+const myPost = require('./routes/my_posts');
 
 const port = process.env.PORT || 8000;
 
@@ -68,7 +69,7 @@ passport.deserializeUser((obj, done) => {
 passport.use(new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'https://ishamd-music-library.herokuapp.com/auth/spotify/callback' //  for dev http://localhost:8000/auth/spotify/callback
+  callbackURL: 'http://localhost:8000/auth/spotify/callback' //  for dev https://ishamd-music-library.herokuapp.com/auth/spotify/callback
 },
   (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...
@@ -85,6 +86,7 @@ app.use(passport.session()); // look into this
 
 app.use(index);
 app.use(credentials);
+app.use(myPost);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
