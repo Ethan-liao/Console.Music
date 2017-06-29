@@ -59,13 +59,15 @@ router.get('/auth/spotify/callback',
             .returning('id')
             .then((id) => {
               req.session.userID = id;
-              console.log('1', req.session.userID);
+              console.log('1: req.session.userID:', req.session.userID);
+              console.log('1: redirect to /library');
               res.redirect('/library');
             });
         } else {
           // start a session with user credentials
           req.session.userID = exists.id;
-          console.log('2', req.session.userID);
+          console.log('2: req.session.userID:', req.session.userID);
+          console.log('2: redirect to /library');
           res.redirect('/library');
         }
       });
@@ -76,9 +78,10 @@ router.get('/auth/spotify/callback',
 router.get('/library', (req, res, next) => {
   // check if user is authenticated
   console.log('library route being hit');
-  console.log(req.session.userID);
+  console.log('3: req.session.userID:', req.session.userID);
   if (req.session.userID) {
     // render library page with posts from db
+    console.log('/library -- session.userID exists');
     knex('posts')
     .join('users_posts', 'posts.id', 'users_posts.post_id')
     .join('users', 'users_posts.user_id', 'users.id')
@@ -93,6 +96,7 @@ router.get('/library', (req, res, next) => {
     });
   } else {
     // go back to login
+    console.log('/library -- session.userID does not exist - redirect to login');
     res.redirect('/');
   }
 });
