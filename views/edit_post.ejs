@@ -5,24 +5,12 @@
 
       <h4>Edit Post:</h4>
 
-        <form method="POST" action="/authors/<%=authors[0]['id']%>/edit?_method=PATCH">
-
+        <form method="POST" action="/my_posts/<%=posts[0].id%>/edit?_method=PATCH">
+          <p><%=posts[0].title%></p>
+          <p><%=posts[0].artist%></p>
           <div class="">
-            <label for="edit-first">Title</label><br>
-            <input type="text" name="first" id="edit-first" value="<%=authors[0]['First Name']%>">
-          </div>
-          <div class="">
-            <label for="edit-last">Last Name</label><br>
-            <input type="text" name="last" id="edit-last" value="<%=authors[0]['Last Name']%>">
-          </div>
-
-          <div class="">
-            <label for="edit-portrait-url">Portrait Image URL</label><br>
-            <input type="url" name="url" id="edit-portrait-url" value="<%=authors[0]['Portrait URL']%>">
-          </div>
-          <div class="">
-            <label for="edit-biography">Biography</label><br>
-            <textarea name="biography" rows="5" cols="80" id="edit-biography"><%=authors[0]['Biography']%></textarea>
+            <label for="comment">Comment</label><br>
+            <textarea name="comment" rows="5" cols="80" id="comment"><%=posts[0].comment%></textarea>
           </div>
           <button type="submit" class="btn btn-default">Update Post</button>
         </form>
