@@ -74,7 +74,10 @@ router.get('/library', (req, res, next) => {
   console.log(req.session.userID);
   if (req.session.userID) {
     // render library page with posts from db
-    knex('posts').orderBy('created_at', 'desc')
+    knex('posts')
+    .join('users_posts', 'posts.id', 'users_posts.post_id')
+    .join('users', 'users_posts.user_id', 'users.id')
+    .orderBy('post_id', 'desc')
     .then((posts) => {
       res.render('library', {
         posts

@@ -4,7 +4,7 @@ exports.up = function (knex) {
     table.increments('id');
     table.string('username').notNullable().defaultTo('');
     table.string('email').notNullable().defaultTo('');
-    table.string('image_url').notNullable().defaultTo('');
+    table.string('profile_url').notNullable().defaultTo('');
     table.boolean('admin').notNullable().defaultTo('');
     table.timestamps(true, true);
   });
