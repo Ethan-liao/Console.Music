@@ -31,11 +31,13 @@ router.get('/auth/spotify',
   //   login page. Otherwise, the primary route function function will be called,
   //   which, in this example, will redirect the user to the home page.
 router.get('/auth/spotify/callback',
-  passport.authenticate('spotify', { failureRedirect: '/login' }),
+  passport.authenticate('spotify', { failureRedirect: '/' }),
   (req, res) => {
     // Successful authentication, redirect to library.
     // add user to db
     let displayName = req.user.displayName;
+    console.log(req.user); // not displaying
+    console.log(displayName); // not displaying
     console.log('callback hit');
 
     if (displayName === null) {
