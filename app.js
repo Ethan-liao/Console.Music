@@ -44,8 +44,8 @@ app.use(cookieSession({
   keys: [process.env.KEY_ONE, process.env.KEY_TWO, process.env.KEY_THREE]
 }));
 
-const appKey = '893c3223efb24f6098017c1a11cfecd0';
-const appSecret = '10c5354ab52548ef80f37c5612eb0c5f';
+const appKey = process.env.SPOTIFY_KEY;
+const appSecret = process.env.SPOTIFY_SECRET;
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -69,7 +69,7 @@ passport.deserializeUser((obj, done) => {
 passport.use(new SpotifyStrategy({
   clientID: appKey,
   clientSecret: appSecret,
-  callbackURL: 'http://localhost:8000/auth/spotify/callback' //  for dev https://ishamd-music-library.herokuapp.com/auth/spotify/callback
+  callbackURL: 'https://ishamd-music-library.herokuapp.com/auth/spotify/callback' //  for dev http://localhost:8000/auth/spotify/callback
 },
   (accessToken, refreshToken, profile, done) => {
     // asynchronous verification, for effect...

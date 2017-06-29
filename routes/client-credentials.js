@@ -4,17 +4,16 @@
  * the Spotify Accounts.
  */
 
-const request = require('request'); // "Request" library
+const request = require('request');
 const express = require('express');
 const knex = require('../knex');
 
 const router = express.Router();
 
-const client_id = '893c3223efb24f6098017c1a11cfecd0'; // Provided by spotfiy
-const client_secret = '10c5354ab52548ef80f37c5612eb0c5f'; // Provided by spotfiy
+const client_id = process.env.SPOTIFY_KEY; // Provided by spotfiy
+const client_secret = process.env.SPOTIFY_SECRET; // Provided by spotfiy
 
 // Info needed to request authorization from spotify
-
 const authOptions = {
   url: 'https://accounts.spotify.com/api/token',
   headers: {
@@ -28,13 +27,10 @@ const authOptions = {
 
 /* Gets the authorization token and makes data request based off form input. */
 router.post('/track', (req, res, next) => {
-  // add session check here
   const trackURI = req.body.track;
   const newLanguage = req.body.language;
   const newComment = req.body.comment;
-  const user = req.body.user_id; // make this dynamic
-
-    // Turn this into a function to accomodate other types of input
+  const user = req.body.user_id;
   const trackID = trackURI.substr(14);
 
   request.post(authOptions, (error, response, body) => {
@@ -73,27 +69,5 @@ router.post('/track', (req, res, next) => {
     }
   });
 });
-
-// GET request for all books from our database
-// router.get('/library', (req, res, next) => {
-//   // check if user is authenticated
-//   console.log(req.session);
-//   // if (req.session.userID) {
-//     // do something
-//   knex('posts').orderBy('created_at', 'desc')
-//     .then((posts) => {
-//       res.render('library', {
-//         posts
-//       });
-//     })
-//     .catch((err) => {
-//       next(err);
-//     });
-//   // } else {
-//     // go back to login and throw error
-//   //   console.log('Not authorized to view this page');
-//   //   res.redirect('/');
-//   // }
-// });
 
 module.exports = router;

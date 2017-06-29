@@ -13,7 +13,6 @@ router.get('/track', (req, res, next) => {
     const user_id = req.session.userID;
     res.render('add_track', { id: user_id });
   } else {
-    console.log('Not authorized to add track');
     res.redirect('/');
   }
 });
@@ -59,16 +58,11 @@ router.get('/auth/spotify/callback',
             .returning('id')
             .then((id) => {
               req.session.userID = id;
-              console.log('user added!');
-              console.log(req.session.userID);
               res.redirect('/library');
             });
         } else {
           // start a session with user credentials
           req.session.userID = exists.id;
-          console.log('user exists in the db!');
-          console.log('session user id:', req.session.userID);
-          // console.log(req.session.passport);
           res.redirect('/library');
         }
       });
@@ -94,8 +88,7 @@ router.get('/library', (req, res, next) => {
       next(err);
     });
   } else {
-    // go back to login and throw error
-    console.log('Not authorized to view this page');
+    // go back to login
     res.redirect('/');
   }
 });
@@ -103,8 +96,6 @@ router.get('/library', (req, res, next) => {
 
 router.get('/logout', (req, res) => {
   req.session = null;
-  console.log(req.session);
-  // req.logout();
   res.redirect('/');
 });
 
