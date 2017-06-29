@@ -1,3 +1,4 @@
+require('dotenv').config();
 const methodOverride = require('method-override');
 const express = require('express');
 const path = require('path');
@@ -13,8 +14,6 @@ const SpotifyStrategy = require('./spotify/index').Strategy;
 const consolidate = require('consolidate');
 
 // const swig = require('swig');
-
-require('dotenv').config();
 
 const index = require('./routes/index');
 const credentials = require('./routes/client-credentials');
