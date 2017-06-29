@@ -24,6 +24,10 @@
                   <a href="<%= post.track_url %>" target='_blank'><p>Link to Track</p></a>
                   <p>Comment:</p>
                   <p><%= post.comment %></p>
+                  <form method="POST" action="/my_posts/<%=post.id%>?_method=DELETE">
+                    <a href=""><button type="button" class="btn btn-defualt">Edit</button></a>
+                    <button type="submit" class="btn btn-defualt" onclick="Materialize.toast('This post has been removed', 4000)">Remove</button>
+                  </form>
                 </div>
               </div>
             </div>

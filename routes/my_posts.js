@@ -28,4 +28,33 @@ router.get('/my_posts', (req, res, next) => {
   }
 });
 
+// DELETE request to remove a book and its reference in join table
+router.delete('/my_posts/:id', (req, res, next) => {
+  const post_id = req.params.id;
+
+  knex('users_posts')
+  .del()
+  .where('post_id', post_id)
+
+    .then(() => knex('posts')
+    .where('id', post_id)
+    .first()
+
+      .then((row) => {
+        if (!row) {
+          return next();
+        }
+        return knex('posts')
+          .del()
+          .where('id', post_id);
+      })
+    )
+    .then(() => {
+      res.redirect('/my_posts');
+    })
+  .catch((err) => {
+    next(err);
+  });
+});
+
 module.exports = router;
