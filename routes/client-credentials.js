@@ -10,8 +10,8 @@ const knex = require('../knex');
 
 const router = express.Router();
 
-const client_id = process.env.SPOTIFY_KEY; // Provided by spotfiy
-const client_secret = process.env.SPOTIFY_SECRET; // Provided by spotfiy
+const client_id = process.env.clientID; // Provided by spotfiy
+const client_secret = process.env.clientSecret; // Provided by spotfiy
 
 // Info needed to request authorization from spotify
 const authOptions = {

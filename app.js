@@ -67,8 +67,8 @@ passport.deserializeUser((obj, done) => {
 //   credentials (in this case, an accessToken, refreshToken, and spotify
 //   profile), and invoke a callback with a user object.
 passport.use(new SpotifyStrategy({
-  clientID: appKey,
-  clientSecret: appSecret,
+  clientID: process.env.clientID,
+  clientSecret: process.env.clientSecret,
   callbackURL: 'https://ishamd-music-library.herokuapp.com/auth/spotify/callback' //  for dev http://localhost:8000/auth/spotify/callback
 },
   (accessToken, refreshToken, profile, done) => {
