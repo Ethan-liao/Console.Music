@@ -64,6 +64,9 @@ router.post('/track', (req, res, next) => {
           }))
           .then(() => {
             res.redirect('/library');
+          })
+          .catch((err) => {
+            next(err);
           });
       });
     }
