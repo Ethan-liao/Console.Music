@@ -45,6 +45,12 @@ router.post('/track', (req, res, next) => {
         json: true
       };
       request.get(options, (error, response, body) => {
+        let previewUrl = body.preview_url;
+
+        if (previewUrl === null) {
+          previewUrl = body.external_urls.spotify;
+        }
+
         knex('posts')
           .returning('id')
           .insert({
@@ -55,7 +61,7 @@ router.post('/track', (req, res, next) => {
             comment: newComment,
             image_url: body.album.images[0].url,
             track_url: body.external_urls.spotify,
-            preview_url: body.preview_url
+            preview_url: previewUrl
           })
           .then(id => knex('users_posts')
           .insert({
