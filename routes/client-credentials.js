@@ -4,6 +4,8 @@
  * the Spotify Accounts.
  */
 
+ // Request is designed to be the simplest way possible to make http calls.
+ // It supports HTTPS and follows redirects by default.
 const request = require('request');
 const express = require('express');
 const knex = require('../knex');
@@ -27,12 +29,16 @@ const authOptions = {
 
 /* Gets the authorization token and makes data request based off form input. */
 router.post('/track', (req, res, next) => {
+  // Stores form input including spotify track URI (uniform resource identifier)
   const trackURI = req.body.track;
   const newLanguage = req.body.language;
   const newComment = req.body.comment;
   const user = req.body.user_id;
+
+  // trims the spotify uri to be passed into request.post below
   const trackID = trackURI.substr(14);
 
+  // Requests access token from Spotify using api keys provided above
   request.post(authOptions, (error, response, body) => {
     if (!error && response.statusCode === 200) {
         // use the access token to access the Spotify Web API
@@ -44,13 +50,15 @@ router.post('/track', (req, res, next) => {
         },
         json: true
       };
+      // GET request to Spotify using authorization token and trackID
       request.get(options, (error, response, body) => {
+        // Validate if response has required urls, cannot be null
         let previewUrl = body.preview_url;
-
         if (previewUrl === null) {
           previewUrl = body.external_urls.spotify;
         }
 
+        // Add the track to our posts and join tables, redirect to home page
         knex('posts')
           .returning('id')
           .insert({
